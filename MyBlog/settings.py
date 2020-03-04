@@ -132,11 +132,15 @@ STATICFILES_DIRS = (
 )
 
 #heroku 设置
-if os.getcwd()=='/app':  #获取当前目录
+
+cwd = os.getcwd()
+
+if cwd=='/app' or cwd[:4]=='/tmp':
     import dj_database_url
-    DATABASES = {
-        'default':dj_database_url.config(default='postgres://localhost')
+    DATABASES={
+        'default': dj_database_url.config(default='postgres://localhost ')
     }
+
 
 #让 request.is_secure()承认X-Forearded-Proto头
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO','https')
